@@ -1,0 +1,31 @@
+{
+  "data": {
+    "edges": [
+      {"id": "loader_to_validator", "source": "data_loader", "target": "data_validator", "sourceHandle": "data_output", "targetHandle": "data_input"},
+      {"id": "validator_to_transformer", "source": "data_validator", "target": "data_transformer", "sourceHandle": "validated_data", "targetHandle": "raw_data"},
+      {"id": "transformer_to_api", "source": "data_transformer", "target": "api_lookup", "sourceHandle": "transformed_data", "targetHandle": "data_input"},
+      {"id": "api_to_filter", "source": "api_lookup", "target": "date_filter", "sourceHandle": "enriched_data", "targetHandle": "data_input"},
+      {"id": "filter_to_router", "source": "date_filter", "target": "subflow_router", "sourceHandle": "filtered_data", "targetHandle": "data_input"},
+      {"id": "router_to_conditional", "source": "subflow_router", "target": "conditional_processor", "sourceHandle": "routed_data", "targetHandle": "data_input"},
+      {"id": "conditional_to_loop", "source": "conditional_processor", "target": "loop_processor", "sourceHandle": "processed_data", "targetHandle": "data_input"},
+      {"id": "loop_to_sentiment", "source": "loop_processor", "target": "sentiment_analyzer", "sourceHandle": "loop_result", "targetHandle": "tickets_input"},
+      {"id": "sentiment_to_stats", "source": "sentiment_analyzer", "target": "stats_calculator", "sourceHandle": "analyzed_data", "targetHandle": "sentiment_data"},
+      {"id": "stats_to_report", "source": "stats_calculator", "target": "report_generator", "sourceHandle": "statistics", "targetHandle": "stats_input"},
+      {"id": "report_to_email", "source": "report_generator", "target": "email_sender", "sourceHandle": "report_content", "targetHandle": "report_input"}
+    ],
+    "nodes": [
+      {"id": "data_loader", "type": "customComponent", "position": {"x": 100, "y": 100}, "data": {"type": "DataLoader"}},
+      {"id": "data_validator", "type": "customComponent", "position": {"x": 200, "y": 100}, "data": {"type": "DataValidator"}},
+      {"id": "data_transformer", "type": "customComponent", "position": {"x": 300, "y": 100}, "data": {"type": "DataTransformer"}},
+      {"id": "api_lookup", "type": "customComponent", "position": {"x": 400, "y": 100}, "data": {"type": "APILookup"}},
+      {"id": "date_filter", "type": "customComponent", "position": {"x": 500, "y": 100}, "data": {"type": "DateFilter"}},
+      {"id": "subflow_router", "type": "customComponent", "position": {"x": 600, "y": 100}, "data": {"type": "SubflowRouter"}},
+      {"id": "conditional_processor", "type": "customComponent", "position": {"x": 700, "y": 100}, "data": {"type": "ConditionalProcessor"}},
+      {"id": "loop_processor", "type": "customComponent", "position": {"x": 800, "y": 100}, "data": {"type": "LoopProcessor"}},
+      {"id": "sentiment_analyzer", "type": "customComponent", "position": {"x": 900, "y": 100}, "data": {"type": "SentimentAnalyzer"}},
+      {"id": "stats_calculator", "type": "customComponent", "position": {"x": 1000, "y": 100}, "data": {"type": "StatsCalculator"}},
+      {"id": "report_generator", "type": "customComponent", "position": {"x": 1100, "y": 100}, "data": {"type": "ReportGenerator"}},
+      {"id": "email_sender", "type": "customComponent", "position": {"x": 1200, "y": 100}, "data": {"type": "EmailSender"}}
+    ]
+  }
+}
